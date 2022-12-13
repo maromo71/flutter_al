@@ -9,7 +9,7 @@ class FormImc extends StatefulWidget {
 
 class _FormImcState extends State<FormImc> {
   String _info = 'Informe seus dados';
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   TextEditingController pesoController = TextEditingController();
   TextEditingController alturaController = TextEditingController();
 
@@ -18,7 +18,6 @@ class _FormImcState extends State<FormImc> {
     alturaController.text = '';
     setState(() {
       _info = "Informe seus dados.";
-      _formKey = GlobalKey<FormState>();
     });
   }
 
@@ -31,7 +30,6 @@ class _FormImcState extends State<FormImc> {
       double peso = double.parse(pesoController.text);
       double altura = double.parse(alturaController.text) / 100;
       double imc = peso / (altura * altura);
-      print(imc);
       if (imc < 18.6) {
         _info = 'Abaixo do Peso (${imc.toStringAsPrecision(3)})';
       } else if (imc < 24.9) {
@@ -95,8 +93,21 @@ class _FormImcState extends State<FormImc> {
               ),
               child: const Text('Calcular'),
               onPressed: () {
-                print('clicou');
                 _calcular();
+              },
+            ),
+          ]),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                textStyle: const TextStyle(fontSize: 22),
+              ),
+              child: const Text('  Limpar'),
+              onPressed: () {
+                _resetFields();
               },
             ),
           ]),
