@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:imc_sample/imc_calc.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Home(),
-  ));
+  runApp(const ImcCalc());
 }
