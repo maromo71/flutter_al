@@ -92,7 +92,7 @@ class _PessoaisPageState extends State<PessoaisPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _registrar(),
-        tooltip: 'Increment',
+        tooltip: 'Cadastrar',
         child: const Icon(Icons.add),
       ),
     );
