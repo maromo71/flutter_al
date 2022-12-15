@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
-
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  ///Imagens
   AssetImage cross = const AssetImage("images/cross.png");
   AssetImage circle = const AssetImage("images/circle.png");
   AssetImage edit = const AssetImage("images/edit.png");
@@ -67,7 +65,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  //Delay Effect
   delay() {
     Future.delayed(const Duration(milliseconds: 2500), () {
       setState(() {
@@ -81,61 +78,61 @@ class _HomePageState extends State<HomePage> {
         (gameState[0] == gameState[1]) &&
         (gameState[1] == gameState[2])) {
       setState(() {
-        message = '${gameState[0]} wins';
+        message = 'Jogador (${gameState[0]}) venceu';
         delay();
       });
     } else if ((gameState[3] != 'empty') &&
         (gameState[3] == gameState[4]) &&
         (gameState[4] == gameState[5])) {
       setState(() {
-        message = '${gameState[3]} wins';
+        message = 'Jogador (${gameState[3]}) venceu';
         delay();
       });
     } else if ((gameState[6] != 'empty') &&
         (gameState[6] == gameState[7]) &&
         (gameState[7] == gameState[8])) {
       setState(() {
-        message = '${gameState[6]} wins';
+        message = 'Jogador (${gameState[6]}) venceu';
         delay();
       });
     } else if ((gameState[0] != 'empty') &&
         (gameState[0] == gameState[3]) &&
         (gameState[3] == gameState[6])) {
       setState(() {
-        message = '${gameState[0]} wins';
+        message = 'Jogador (${gameState[0]}) venceu';
         delay();
       });
     } else if ((gameState[1] != 'empty') &&
         (gameState[1] == gameState[4]) &&
         (gameState[4] == gameState[7])) {
       setState(() {
-        message = '${gameState[1]} wins';
+        message = 'Jogador (${gameState[1]}) venceu';
         delay();
       });
     } else if ((gameState[2] != 'empty') &&
         (gameState[2] == gameState[5]) &&
         (gameState[5] == gameState[8])) {
       setState(() {
-        message = '${gameState[2]} wins';
+        message = 'Jogador (${gameState[2]}) venceu';
         delay();
       });
     } else if ((gameState[0] != 'empty') &&
         (gameState[0] == gameState[4]) &&
         (gameState[4] == gameState[8])) {
       setState(() {
-        message = '${gameState[0]} wins';
+        message = 'Jogador (${gameState[0]}) venceu';
         delay();
       });
     } else if ((gameState[2] != 'empty') &&
         (gameState[2] == gameState[4]) &&
         (gameState[4] == gameState[6])) {
       setState(() {
-        message = '${gameState[2]} wins';
+        message = 'Jogador (${gameState[2]}) venceu';
         delay();
       });
     } else if (!gameState.contains('empty')) {
       setState(() {
-        message = 'Game Draw';
+        message = 'Deu Velha';
         delay();
       });
     }
