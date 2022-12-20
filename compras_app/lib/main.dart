@@ -1,4 +1,4 @@
-import 'formulario_compra.dart';
+import 'package:compras_app/lista_compras.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,8 +16,8 @@ class ComprasApp extends StatelessWidget {
           seedColor: Colors.red,
         ),
       ),
-      home: Scaffold(
-        body: FormularioCompra(),
+      home: const Scaffold(
+        body: ListaCompras(),
       ),
     );
   }

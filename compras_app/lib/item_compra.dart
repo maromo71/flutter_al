@@ -1,10 +1,10 @@
+import 'package:compras_app/model/compra.dart';
 import 'package:flutter/material.dart';
 
 class ItemCompra extends StatelessWidget {
-  const ItemCompra({super.key, required this.nomeProduto, required this.valor});
+  final Compra compra;
 
-  final String nomeProduto;
-  final String valor;
+  const ItemCompra({super.key, required this.compra});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +13,8 @@ class ItemCompra extends StatelessWidget {
         leading: const Icon(
           Icons.monetization_on_outlined,
         ),
-        title: Text(nomeProduto),
-        subtitle: Text(valor),
+        title: Text(compra.nomeProduto!),
+        subtitle: Text(compra.valorProduto.toString()),
       ),
     );
   }

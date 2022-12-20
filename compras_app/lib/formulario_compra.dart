@@ -1,24 +1,22 @@
-import 'dart:ffi';
-
-import 'package:compras_app/item_compra.dart';
+import 'package:compras_app/model/compra.dart';
 import 'package:flutter/material.dart';
 
 class FormularioCompra extends StatelessWidget {
   FormularioCompra({super.key});
 
-  final TextEditingController _nomeProdutoController = TextEditingController();
-  final TextEditingController _valorController = TextEditingController();
+  final TextEditingController nomeProdutoController = TextEditingController();
+  final TextEditingController valorProdutoController = TextEditingController();
 
-  _cadastrar() {
-    final String nomeProduto = _nomeProdutoController.text;
-    final String valorProduto = _valorController.text;
-    if (nomeProduto == '' || valorProduto == '') {
-      return; //segurança
+  void _cadastrar(BuildContext context) {
+    if (nomeProdutoController.text == '' || valorProdutoController.text == '') {
+      return;
     }
-    final itemCompra =
-        ItemCompra(nomeProduto: nomeProduto, valor: valorProduto);
-    debugPrint(itemCompra.nomeProduto);
-    debugPrint(itemCompra.valor);
+    final String nomeProduto = nomeProdutoController.text;
+    final double valorProduto = double.parse(valorProdutoController.text);
+    final compraGerada =
+        Compra(nomeProduto: nomeProduto, valorProduto: valorProduto);
+    debugPrint('Compra gerada: $compraGerada');
+    Navigator.pop(context, compraGerada);
   }
 
   @override
@@ -30,21 +28,22 @@ class FormularioCompra extends StatelessWidget {
       body: Column(
         children: [
           Editor(
-              controlador: _nomeProdutoController,
-              rotulo: 'Nome do Produto',
-              dica: 'Nome do produto',
-              possuiDecimal: false),
+            controlador: nomeProdutoController,
+            rotulo: 'Nome do Produto',
+            dica: 'nome do produto',
+          ),
           Editor(
-              controlador: _valorController,
-              rotulo: 'Valor do Produto',
-              dica: '9.99',
-              icone: Icons.monetization_on,
-              possuiDecimal: true),
+            controlador: valorProdutoController,
+            rotulo: 'Valor do Produto',
+            dica: '0.00',
+            decimal: true,
+            icone: Icons.monetization_on,
+          ),
           ElevatedButton(
-            onPressed: () {
-              _cadastrar();
-            },
             child: const Text('Cadastrar'),
+            onPressed: () {
+              _cadastrar(context);
+            },
           )
         ],
       ),
@@ -53,23 +52,24 @@ class FormularioCompra extends StatelessWidget {
 }
 
 class Editor extends StatelessWidget {
-  final TextEditingController controlador;
-  final String rotulo;
-  final String dica;
-  final IconData? icone;
-  final bool possuiDecimal;
-
   const Editor(
       {super.key,
       required this.controlador,
       required this.rotulo,
       required this.dica,
-      this.icone,
-      required this.possuiDecimal});
+      this.decimal,
+      this.icone});
+
+  final TextEditingController controlador;
+  final String rotulo;
+  final String dica;
+  final bool? decimal;
+  final IconData? icone;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         controller: controlador,
         style: const TextStyle(fontSize: 20.0),
@@ -81,9 +81,7 @@ class Editor extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(5.0)),
           ),
         ),
-        keyboardType: possuiDecimal
-            ? const TextInputType.numberWithOptions(decimal: true)
-            : const TextInputType.numberWithOptions(decimal: false),
+        keyboardType: TextInputType.numberWithOptions(decimal: decimal),
       ),
     );
   }

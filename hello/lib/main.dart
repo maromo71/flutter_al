@@ -10,17 +10,51 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Flutter: primeiros passos'),
+      theme: ThemeData.from(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.red,
+        ),
+      ),
+      home: const Tela(),
+    );
+  }
+}
+
+class Tela extends StatelessWidget {
+  const Tela({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 20,
+                height: 20,
+                color: Colors.red,
+              ),
+              Container(
+                width: 20,
+                height: 20,
+                color: Colors.yellow,
+              ),
+              Container(
+                width: 20,
+                height: 20,
+                color: Colors.green,
+              ),
+            ],
           ),
-          body: Container(
-            color: Colors.grey,
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-          ),
-        ));
+        ],
+      ),
+      appBar: AppBar(
+        title: const Text('Exemplo'),
+      ),
+    );
   }
 }
