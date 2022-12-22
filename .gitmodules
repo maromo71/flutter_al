@@ -1,0 +1,3 @@
+[submodule "flutter-chat-demo"]
+	path = flutter-chat-demo
+	url = https://github.com/maromo71/flutter_al

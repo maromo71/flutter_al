@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "522033726888",
+    "firebase_url": "https://biblio-rdb-app.firebaseio.com",
+    "project_id": "biblio-rdb-app",
+    "storage_bucket": "biblio-rdb-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522033726888:android:304a7fdccfa9951ed8099d",
+        "android_client_info": {
+          "package_name": "com.example.app_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522033726888-6ernf6u9mkadama8kabto2mjis1kqvi6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3FP7JLk7UAZiunFIzsQHybnZadAY4Gpc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522033726888-6ernf6u9mkadama8kabto2mjis1kqvi6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
