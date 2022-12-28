@@ -1,3 +1,6 @@
+import 'package:app_firebase/models/usuario.dart';
+import 'package:app_firebase/screens/restrict.dart';
+import 'package:app_firebase/services/flutter_fire_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'signup.dart';
@@ -12,7 +15,8 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
-  //final _signinEmailAndPasswordLoading = false;
+
+  bool signInEmailAndPasswordLoading = false;
 
   @override
   void dispose() {
@@ -35,6 +39,36 @@ class _SignInState extends State<SignIn> {
         ),
       );
       resetForm();
+    }
+
+    void navigateToRestrict(Usuario usuario) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Restrict(usuario: usuario),
+        ),
+      );
+    }
+
+    void signInEmailAndPassword() async {
+      final email = _emailController.text;
+      final senha = _senhaController.text;
+
+      setState(() {
+        signInEmailAndPasswordLoading = true;
+      });
+
+      final usuario = await FlutterFireAuth(context)
+          .signInWithEmailAndPassword(email, senha);
+
+      setState(() {
+        signInEmailAndPasswordLoading = false;
+      });
+
+      if (usuario != null) {
+        resetForm();
+        navigateToRestrict(usuario);
+      }
     }
 
     return SafeArea(
@@ -104,8 +138,11 @@ class _SignInState extends State<SignIn> {
                       child: ElevatedButton(
                         onPressed: navigateToSignUp,
                         style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.redAccent,
+                          ),
                           minimumSize: MaterialStateProperty.all(
-                            const Size(180, 40),
+                            const Size(double.infinity, 48.0),
                           ),
                         ),
                         child: const Text(
@@ -122,10 +159,10 @@ class _SignInState extends State<SignIn> {
                     Align(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: signInEmailAndPassword,
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
-                            const Size(180, 40),
+                            const Size(double.infinity, 48),
                           ),
                         ),
                         child: const Text(

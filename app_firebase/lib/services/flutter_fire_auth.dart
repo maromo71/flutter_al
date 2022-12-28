@@ -48,9 +48,42 @@ class FlutterFireAuth {
     }
   }
 
-  void signInWithEmailAndPassword() {}
+  Future<Usuario?> signInWithEmailAndPassword(
+      String email, String senha) async {
+    try {
+      final credencial =
+          await _auth.signInWithEmailAndPassword(email: email, password: senha);
 
-  void getLoggedUser() {}
+      return Usuario(
+        avatar: credencial.user?.photoURL,
+        nome: credencial.user?.displayName,
+        email: credencial.user?.email,
+      );
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+      ScaffoldMessenger.of(_context).showSnackBar(
+        SnackBar(
+          content: Text('Erro:  + ${e.toString()}'),
+        ),
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Usuario? getLoggedUser() {
+    final usuario = _auth.currentUser;
+
+    if (usuario == null) {
+      return null;
+    }
+
+    return Usuario(
+      nome: usuario.displayName,
+      email: usuario.email,
+      avatar: usuario.photoURL,
+    );
+  }
 
   Future<void> signOut() async {
     await _auth.signOut();
