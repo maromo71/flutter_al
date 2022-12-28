@@ -69,7 +69,8 @@ class DefaultFirebaseOptions {
     projectId: 'biblio-rdb-app',
     databaseURL: 'https://biblio-rdb-app.firebaseio.com',
     storageBucket: 'biblio-rdb-app.appspot.com',
-    iosClientId: '522033726888-m2edbeoo4el8mdf0r8rtav34bhcs0b8b.apps.googleusercontent.com',
+    iosClientId:
+        '522033726888-m2edbeoo4el8mdf0r8rtav34bhcs0b8b.apps.googleusercontent.com',
     iosBundleId: 'com.example.appFirebase',
   );
 
@@ -80,7 +81,8 @@ class DefaultFirebaseOptions {
     projectId: 'biblio-rdb-app',
     databaseURL: 'https://biblio-rdb-app.firebaseio.com',
     storageBucket: 'biblio-rdb-app.appspot.com',
-    iosClientId: '522033726888-m2edbeoo4el8mdf0r8rtav34bhcs0b8b.apps.googleusercontent.com',
+    iosClientId:
+        '522033726888-m2edbeoo4el8mdf0r8rtav34bhcs0b8b.apps.googleusercontent.com',
     iosBundleId: 'com.example.appFirebase',
   );
 }
