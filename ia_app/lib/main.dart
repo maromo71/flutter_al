@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:ia_app/chat_meesage_widget.dart';
+import 'package:ia_app/chat_message_widget.dart';
 import 'package:ia_app/model.dart';
 import 'package:ia_app/constant.dart';
 import 'package:http/http.dart' as http;
@@ -72,6 +72,11 @@ class _ChatPageState extends State<ChatPage> {
     // Do something with the response
 
     Map<String, dynamic> newresponse = jsonDecode(response.body);
+    debugPrint(response.body);
+    if (newresponse['choices'][0]['text'] == null) {
+      debugPrint("Instavel no momento.");
+      debugPrint(response.body);
+    }
     return newresponse['choices'][0]['text'];
   }
 
@@ -165,24 +170,37 @@ class _ChatPageState extends State<ChatPage> {
 
             var input = _textEditingController.text;
             _textEditingController.clear();
-            Future.delayed(const Duration(microseconds: 50))
-                .then((value) => _scrolDown());
+            Future.delayed(const Duration(microseconds: 50)).then((value) {
+              debugPrint("linha 170");
+              _scrolDown();
+            }).catchError((error) {
+              debugPrint("Erro: ${error.toString()}");
+            });
 
             //chamar a api do chatbot
             generateResponse(input).then((value) {
+              debugPrint(value);
+              debugPrint("linha 178");
               setState(() {
+                debugPrint('Cheguei aqui..');
                 isLoading = false;
                 //mostrar resposta do chatbot
-                debugPrint(value);
-                String sDecoded = utf8.decode(value.runes.toList());
+                // debugPrint(value);
+                // String sDecoded = utf8.decode(value.runes.toList());
+
                 _messages.add(
-                  ChatMessage(text: sDecoded, messageType: MessageType.bot),
+                  ChatMessage(text: value, messageType: MessageType.bot),
                 );
               });
+            }).catchError((error) {
+              debugPrint('Linha 195. Aconteceu o erro: ${error.toString()}');
             });
             _textEditingController.clear();
             Future.delayed(const Duration(milliseconds: 50))
-                .then((value) => _scrolDown());
+                .then((value) => _scrolDown())
+                .catchError((error) {
+              debugPrint('Erro ${error.toString()}');
+            });
           },
         ),
       ),
@@ -210,6 +228,7 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void _scrolDown() {
+    debugPrint("Linha 218");
     _scrollController.animateTo(
       _scrollController.position.maxScrollExtent,
       duration: const Duration(milliseconds: 300),
