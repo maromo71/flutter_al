@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ia_app/constant.dart';
+import 'package:ia_app/model.dart';
 
 class ChatMessageWidget extends StatelessWidget {
   const ChatMessageWidget(
