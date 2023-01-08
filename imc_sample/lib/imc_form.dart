@@ -27,9 +27,15 @@ class _FormImcState extends State<FormImc> {
         _info = 'Informe corretamente os dados';
         return;
       }
-      double peso = double.parse(pesoController.text);
-      double altura = double.parse(alturaController.text) / 100;
-      double imc = peso / (altura * altura);
+      double peso = 0, altura = 0, imc = 0;
+      try {
+        peso = double.parse(pesoController.text);
+        altura = double.parse(alturaController.text) / 100;
+        imc = peso / (altura * altura);
+      } catch (e) {
+        debugPrint("Erro na entrada de dados ou no tipo de dados");
+      }
+
       if (imc < 18.6) {
         _info = 'Abaixo do Peso (${imc.toStringAsPrecision(3)})';
       } else if (imc < 24.9) {
